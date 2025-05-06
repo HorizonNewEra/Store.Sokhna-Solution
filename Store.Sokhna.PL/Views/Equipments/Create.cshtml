@@ -1,0 +1,52 @@
+﻿@model Equipments
+@{
+    ViewData["Title"] = "Add Equipments";
+    var importers = new SelectList(ViewData["D2"] as IEnumerable<Importers>, "Name", "Name");
+    var Role = TempData["Role"] as string;
+    var USSN = TempData["SSN"] as string;
+    var Uname = TempData["FullName"] as string;
+}
+<h1>اضافه معده</h1>
+<br />
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Name" class="col-form-label">اسم المعده</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Importer" class="col-form-label">المورد</label>
+        <select asp-for="Importer" asp-items="importers" class="form-control">
+            <option value="@null">-----Select Importer-----</option>
+        </select>
+        <span asp-validation-for="Importer" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="HourPrice" class="col-form-label">سعر الساعه</label>
+        <input asp-for="HourPrice" id="HourPrice" class="form-control" />
+        <span asp-validation-for="HourPrice" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="HourCount" class="col-form-label">عدد الساعات</label>
+        <input asp-for="HourCount" id="HourCount" class="form-control" />
+        <span asp-validation-for="HourCount" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="TotalPrice" class="col-form-label">السعر الكلي</label>
+        <input type="text" readonly id="TotalPrice" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label class="col-form-label">اسم المهندس</label>
+        <input type="text" readonly value="@Uname" class="form-control" />
+        <input type="text" asp-for="SSN" hidden readonly value="@USSN" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="DateOfAdding" class="col-form-label">تاريخ الاضافه</label>
+        <input asp-for="DateOfAdding" type="date" class="form-control" />
+        <span asp-validation-for="DateOfAdding" class="text-danger"></span>
+    </div>
+    <br />
+    <input type="submit" value="اضافه" class="btn btn-primary" />
+    <a asp-action="Index" class="btn btn-info">عوده الي القائمه</a>
+</form>
+

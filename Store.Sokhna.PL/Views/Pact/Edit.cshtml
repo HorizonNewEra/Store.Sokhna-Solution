@@ -1,0 +1,22 @@
+﻿@model Pact
+@{
+    ViewData["Title"] = "Update Pact";
+    var Role = TempData["Role"] as string;
+}
+<h1>تعديل عهده</h1>
+<br />
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+    @if (Role == "Engineer")
+    {
+        <partial name="PartialEdit/Engineer" model="Model" />
+    }
+    else
+    {
+        <partial name="PartialEdit/Accountant" model="Model" />
+    }
+    <br />
+    <input type="submit" value="تعديل" class="btn btn-primary" />
+    <a asp-action="Index" class="btn btn-info">عوده الي القائمه</a>
+</form>
+

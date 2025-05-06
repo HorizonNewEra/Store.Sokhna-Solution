@@ -1,0 +1,46 @@
+﻿@model Equipments
+@{
+    ViewData["Title"] = "Delete";
+    var Role = TempData["Role"] as string;
+}
+<h1>حذف معدات</h1>
+<br />
+<form asp-action="Delete">
+    <div hidden>
+        <input readonly asp-for="Eq_ID" class="form-control" />
+        <input readonly asp-for="SSN" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Name" class="col-form-label">اسم المعده</label>
+        <input readonly asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Importer" class="col-form-label">المورد</label>
+        <input readonly asp-for="Importer" class="form-control" />
+        <span asp-validation-for="Importer" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="HourPrice" class="col-form-label">سعر الساعه</label>
+        <input readonly asp-for="HourPrice" id="HourPrice" class="form-control" />
+        <span asp-validation-for="HourPrice" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="HourCount" class="col-form-label">عدد الساعات</label>
+        <input readonly asp-for="HourCount" id="HourCount" class="form-control" />
+        <span asp-validation-for="HourCount" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="TotalPrice" class="col-form-label">السعر الكلي</label>
+        <input type="text" readonly value="@Model.TotalPrice" id="TotalPrice" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="DateOfAdding" class="col-form-label">تاريخ الاضافه</label>
+        <input readonly asp-for="DateOfAdding" class="form-control" />
+        <span asp-validation-for="DateOfAdding" class="text-danger"></span>
+    </div>
+    <br />
+    <input type="submit" value="حذف" class="btn btn-danger" />
+    <a asp-action="Index" class="btn btn-info">عوده الي القائمه</a>
+</form>
+

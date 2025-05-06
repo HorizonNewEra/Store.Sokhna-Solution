@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Supplies_Outcome>
+
+@{
+    ViewData["Title"] = "Supplies Outcome";
+    var Role = TempData["Role"] as string;
+}
+<div class="container">
+    <h2 class="text-center my-4">التوريدات</h2>
+    <br />
+    <br />
+    <a asp-action="Create" class="btn btn-primary">اضافه</a>
+    <br />
+    <br />
+    <div class="row">
+        @if (Model.Count() > 0)
+        {
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <td>المهندس</td>
+                        <td>المورد</td>
+                        <td>نوع التوريد</td>
+                        <td>الكميه</td>
+                        <td>سعر الوحده</td>
+                        <td>المبلغ الاجمالي</td>
+                        <td>نوع الوحده</td>
+                        <td>تاريخ الاضافه</td>
+                        <td>البون</td>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var pact in Model)
+                         {
+                            <tr>
+                                <td>@Html.DisplayFor(M => pact.Engineer.FullName)</td>
+                                <td>@Html.DisplayFor(M => pact.Importer)</td>
+                                <td>@Html.DisplayFor(M => pact.Type)</td>
+                                <td>@Html.DisplayFor(M => pact.Amount)</td>
+                                <td>@Html.DisplayFor(M => pact.CountPrice)</td>
+                                <td>@Html.DisplayFor(M => pact.Price)</td>
+                                <td>@Html.DisplayFor(M => pact.PriceType)</td>
+                                <td>@Html.DisplayFor(M => pact.DateOfAdding)</td>
+                                <td>
+                                @if (pact.ImageName is not null)
+                                {
+                                    <a class="btn btn-info" onclick="changeImage('/media/images/@(pact.ImageName)')" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        <i class="fas fa-eye"></i> صوره
+                                    </a>
+                                }
+                                else
+                                {
+                                    <p>لم يتم رفع صوره للبون </p>
+                                }
+                                </td>
+                                <td>
+                                <a asp-action="Details" asp-route-id="@pact.SO_ID" class="btn btn-secondary">
+                                        <i class="fas fa-eye"></i> تفاصيل
+                                    </a>
+                                </td>
+                                <td>
+                                <a asp-action="Edit" asp-route-id="@pact.SO_ID" class="btn btn-primary">
+                                        <i class="fas fa-edit"></i> تعديل
+                                    </a>
+                                </td>
+                                <td>
+                                <a asp-action="Delete" asp-route-id="@pact.SO_ID" class="btn btn-danger">
+                                        <i class="fas fa-trash"></i> حذف
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                </tbody>
+            </table>    
+        }
+        else
+        {
+        <div class="mt-4 alert alert-warning">
+                <h4>لا يوجد توريدات</h4>
+        </div>
+        }
+    </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog .modal-dialog-work">
+        <div class="modal-content">
+@*             <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Image</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div> *@
+            <div class="modal-body">
+                <img src="" id="Imgchange" alt="Image" />
+            </div>
+@*             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div> *@
+        </div>
+    </div>
+</div>

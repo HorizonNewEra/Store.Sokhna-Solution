@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewData["Title"] = "القائمه الرئيسية";
+    Layout = "~/Views/Shared/_FinancialManagerLayout.cshtml";
+}
+
+<div class="d-flex justify-content-center align-content-center">
+    <div class="main-div bg-success d-flex">
+        <a asp-controller="Financials" asp-action="DailyFees" class="btn-ilatic"><span>دقتر يوميه</span></a>
+        <a asp-controller="Financials" asp-action="TrialBalance" class="btn-ilatic"><span>ميزان المراجعه</span></a>
+    </div>
+</div>
+

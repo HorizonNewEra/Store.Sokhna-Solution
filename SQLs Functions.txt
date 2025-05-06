@@ -1,0 +1,41 @@
+ALTER function [dbo].[GetallImporterReport] ()
+returns @tblall table ([Importer] nvarchar(max),[ValueTake] float,[ValueNeed] float)
+as
+begin
+declare @count int;set @count=(SELECT count([Name]) FROM [dbo].[Importers])
+while @count>=1
+begin
+declare @name nvarchar(14); set @name=(SELECT [Name] FROM 
+	(SELECT ROW_NUMBER() OVER (ORDER BY [Name] desc) AS rownumber,[Name] FROM [dbo].[Importers]) AS foo WHERE rownumber =@count)
+	declare @Pacts float; set @Pacts = (SELECT sum([Value]) FROM [dbo].Supplies_Incomes where [Importer]=@name)
+	declare @Equip float; set @Equip = (SELECT sum(isnull([TotalPrice],0)) FROM [dbo].Equipmentss where [Importer]=@name)
+	declare @sup float; set @sup = (SELECT sum(isnull([Price],0)) FROM [dbo].Supplies_Outcomes where [Importer]=@name)
+	declare @allneed float; set @allneed = isnull(@Equip,0)+isnull(@sup,0)
+	insert into @tblall([Importer],[ValueNeed],[ValueTake]) VALUES(@name,isnull(@Pacts,0),@allneed)
+	set @count=@count-1;
+	end
+return;
+end;
+
+
+/////////////////////
+ALTER function [dbo].[GetallPactsReport] ()
+returns @tblall table ([FullName] nvarchar(max),[SSN] nvarchar(14),[PactValue] float,[RestValue] float)
+as
+begin
+declare @count int;set @count=(SELECT count([SSN]) FROM [dbo].[Userss] where [Job]='Engineer')
+while @count>=1
+begin
+declare @SSN nvarchar(14); set @SSN=(SELECT [SSN] FROM 
+	(SELECT ROW_NUMBER() OVER (ORDER BY [FullName] desc) AS rownumber,[SSN] FROM [dbo].[Userss] where [Job]='Engineer') AS foo WHERE rownumber =@count)
+	declare @name nvarchar(max); set @name = (SELECT [FullName] FROM [dbo].[Userss] where [SSN]=@SSN)
+	declare @Pacts float; set @Pacts = (SELECT sum([Value]) FROM [dbo].Pacts where [SSN]=@SSN)
+	declare @Equip float; set @Equip = (SELECT sum(isnull([TotalPrice],0)) FROM [dbo].Equipmentss where [SSN]=@SSN)
+	declare @Exp float; set @Exp = (SELECT sum(isnull([Value],0)) FROM [dbo].Expensess where [SSN]=@SSN)
+	declare @sup float; set @sup = (SELECT sum(isnull([Price],0)) FROM [dbo].Supplies_Outcomes where [SSN]=@SSN)
+	declare @allneed float; set @allneed = isnull(@Equip,0)+isnull(@Exp,0)+isnull(@sup,0)
+	insert into @tblall([FullName],[SSN],[PactValue],[RestValue]) VALUES(@name,@SSN,isnull(@Pacts,0),@allneed)
+	set @count=@count-1;
+	end
+return;
+end;

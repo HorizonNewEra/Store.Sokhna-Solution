@@ -1,0 +1,22 @@
+﻿@model SignUpViewModel
+@{
+    ViewData["Title"] = "Sign UP";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+<h1>Sign Up</h1>
+<div class="main-agileinfo">
+	<div class="text-center h4 text-danger" asp-validation-summary="All">
+	</div>
+		<div class="agileits-top">
+			<form asp-action="SignUp">
+			<input class="text user" type="text" asp-for="UserName" placeholder="اسم المستخدم" required="">
+			<input class="text" type="tel" asp-for="Serial" maxlength="14" placeholder="الرقم القومي" required="">
+			<input class="text email" type="email" asp-for="Email" placeholder="البريد الالكتروني" required="">
+			<input class="text" type="password" asp-for="Password" placeholder="رقم السر" required="">
+			<input class="text w3lpass" type="password" asp-for="ConfirmPassword" placeholder="تاكيد رقم السر" required="">
+			<input type="submit" value="انشائ حساب">
+			</form>
+		<p> لديك حساب ؟ <a asp-action="LogIn" class="text-decoration"> تسجيل دخول</a></p>
+		</div>
+</div>
+

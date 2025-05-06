@@ -1,0 +1,30 @@
+﻿@model LogInViewModel
+@{
+    ViewData["Title"] = "Log In";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+<h1>تسجيل دخول</h1>
+<div class="main-agileinfo">
+	<div class="text-center h4 text-danger" asp-validation-summary="All">
+		
+	</div>
+	<div class="agileits-top">
+		<form action="#" method="post">
+			<input class="text" asp-for="UserName" placeholder="اسم المستخدم" required="">
+			<input class="text w3lpass" asp-for="Password" placeholder="الرقم السري" required="">
+			<div class="wthree-text">
+				<label class="anim">
+					<input asp-for="RememberMe" class="checkbox">
+					<span>تذكرني</span>
+				</label>
+				<div class="clear"></div>
+			</div>
+			<input type="submit" value="تسجيل دخول">
+		</form>
+		<p> ليس لدي حساب ؟ <a asp-action="SignUp" class="text-decoration"> انشاء حساب</a></p>
+		<br />
+		<br />
+		<p><a asp-action="ForgetPassword" class="text-decoration"> نسيت كلمت السر </a></p>
+	</div>
+</div>
+

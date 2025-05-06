@@ -1,0 +1,48 @@
+﻿@model Pact
+@{
+    ViewData["Title"] = "Details";
+    var Role = TempData["Role"] as string;
+}
+
+<h1>تفاصيل</h1>
+<br />
+<div>
+    <div class="form-group">
+        <label asp-for="Pact_ID" class="col-form-label">Pact ID</label>
+        <input readonly asp-for="Pact_ID" class="form-control" />
+        <span asp-validation-for="Pact_ID" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Engineer.FullName" class="col-form-label">اسم المهندس</label>
+        <input readonly asp-for="Engineer.FullName" class="form-control" />
+        <span asp-validation-for="Engineer.FullName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Value" class="col-form-label">المبلغ</label>
+        <input readonly asp-for="Value" class="form-control" />
+        <span asp-validation-for="Value" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Note" class="col-form-label">ملحوظات</label>
+        <input readonly asp-for="Note" class="form-control" />
+        <span asp-validation-for="Note" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Confirmed" class="col-form-label">تاكيد العمليه</label>
+        <input readonly disabled asp-for="Confirmed" type="checkbox" />
+        <span asp-validation-for="Confirmed" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DateOfAdding" class="col-form-label">تاريخ الاضافه</label>
+        <input readonly asp-for="DateOfAdding" class="form-control" />
+        <span asp-validation-for="DateOfAdding" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DateOfConfirmation" class="col-form-label">تاريخ التاكيد</label>
+        <input readonly asp-for="DateOfConfirmation" class="form-control" />
+        <span asp-validation-for="DateOfConfirmation" class="text-danger"></span>
+    </div>
+    <br />
+    <a asp-action="Edit" asp-route-id="@Model.Pact_ID" class="btn btn-primary">تعديل</a>
+    <a asp-action="Index" class="btn btn-info">عوده الي القائمه</a>
+</div>

@@ -1,0 +1,57 @@
+﻿@model Equipments
+@{
+    var importers = new SelectList(ViewData["D2"] as IEnumerable<Importers>, "Name", "Name");
+    ViewData["Title"] = "Update Equipments";
+    var Role = TempData["Role"] as string;
+    var USSN = TempData["SSN"] as string;
+    var Uname = TempData["FullName"] as string;
+}
+<h1>تعديل معدات</h1>
+<br />
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+    <div hidden>
+        <input readonly asp-for="Eq_ID" class="form-control" />
+        <input readonly asp-for="SSN" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Name" class="col-form-label">Name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Importer" class="col-form-label">Price</label>
+        <select asp-for="Importer" asp-items="importers" class="form-control">
+            <option value="@null">-----Select Importer-----</option>
+        </select>
+        <span asp-validation-for="Importer" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="HourPrice" class="col-form-label">Price Per Hour</label>
+        <input asp-for="HourPrice" id="HourPrice" class="form-control" />
+        <span asp-validation-for="HourPrice" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="HourCount" class="col-form-label">Hour Count</label>
+        <input asp-for="HourCount" id="HourCount" class="form-control" />
+        <span asp-validation-for="HourCount" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="TotalPrice" class="col-form-label">Total Price</label>
+        <input type="text" readonly value="@Model.TotalPrice" id="TotalPrice" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label class="col-form-label">اسم المهندس</label>
+        <input type="text" readonly value="@Uname" class="form-control" />
+        <input type="text" asp-for="SSN" hidden readonly value="@USSN" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="DateOfAdding" class="col-form-label">Date of Adding</label>
+        <input asp-for="DateOfAdding" type="date" class="form-control" />
+        <span asp-validation-for="DateOfAdding" class="text-danger"></span>
+    </div>
+    <br />
+    <input type="submit" value="Edit" class="btn btn-primary" />
+    <a asp-action="Index" class="btn btn-info">Back To List</a>
+</form>
+

@@ -1,0 +1,44 @@
+﻿.main-div {
+    width:70vw;
+    height:70vh;
+}
+
+.btn-ilatic {
+    background: #4abf9c;
+    border: none;
+    padding: 10px 20px;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 600;
+    height: 45px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transform: skew(-15deg);
+    margin: 10px 20px 10px 0px;
+}
+
+.btn-ilatic span {
+    display: inline-block;
+    transform: skew(21deg);
+}
+
+    .btn-ilatic::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 100%;
+        left: 0;
+        background: #31D2F2;
+        opacity: 0;
+        z-index: -1;
+        transition: all 0.5s;
+    }
+    .btn-ilatic:hover {
+        color: #000;
+    }
+        .btn-ilatic:hover::before {
+            left: 0;
+            right: 0;
+            opacity: 1;
+        }

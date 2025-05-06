@@ -1,0 +1,38 @@
+﻿@model Supplies_Income
+@{
+    ViewData["Title"] = "Delete";
+    var Role = TempData["Role"] as string;
+}
+<h1>حذف حساب مورد</h1>
+<br />
+<form asp-action="Delete">
+    <div hidden>
+        <input readonly asp-for="SI_ID" class="form-control" />
+        <input readonly asp-for="SSN" class="form-control" />
+        <input readonly asp-for="SupplyAdder" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Value" class="col-form-label">المبلغ</label>
+        <input readonly asp-for="Value" class="form-control" />
+        <span asp-validation-for="Value" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Type" class="col-form-label">نوع التوريد</label>
+        <input readonly asp-for="Type" class="form-control" />
+        <span asp-validation-for="Type" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Importer" class="col-form-label">المورد</label>
+        <input readonly asp-for="Importer" class="form-control" />
+        <span asp-validation-for="Importer" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DateOfAdding" class="col-form-label">تاريخ التوريد</label>
+        <input readonly asp-for="DateOfAdding" class="form-control" />
+        <span asp-validation-for="DateOfAdding" class="text-danger"></span>
+    </div>
+    <br />
+    <input type="submit" value="حذف" class="btn btn-danger" />
+    <a asp-action="Index" class="btn btn-info">عوده الي القائمه</a>
+</form>
+

@@ -1,0 +1,42 @@
+﻿@model Expenses
+@{
+    ViewData["Title"] = "Delete";
+    var Role = TempData["Role"] as string;
+}
+<h1>حذف نثريات</h1>
+<br />
+<form asp-action="Delete">
+    <div hidden>
+        <input readonly asp-for="Exp_ID" class="form-control" />
+        <input readonly asp-for="SSN" class="form-control" />
+    </div>
+    <div class="form-group" hidden>
+        <label asp-for="SSN" class="col-form-label">اسم المهندس</label>
+        <input readonly asp-for="SSN" class="form-control" />
+        <span asp-validation-for="SSN" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Value" class="col-form-label">المبلغ</label>
+        <input readonly asp-for="Value" class="form-control" />
+        <span asp-validation-for="Value" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Details" class="col-form-label">تفاصيل</label>
+        <input readonly asp-for="Details" class="form-control" />
+        <span asp-validation-for="Details" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Note" class="col-form-label">ملحوظات</label>
+        <input readonly asp-for="Note" class="form-control" />
+        <span asp-validation-for="Note" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DateOfAdding" class="col-form-label">تاريخ الاضافه</label>
+        <input readonly asp-for="DateOfAdding" class="form-control" />
+        <span asp-validation-for="DateOfAdding" class="text-danger"></span>
+    </div>
+    <br />
+    <input type="submit" value="حذف" class="btn btn-danger" />
+    <a asp-action="Index" class="btn btn-info">عوده الي القائمه</a>
+</form>
+

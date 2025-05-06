@@ -1,0 +1,169 @@
+﻿
+@{
+    ViewData["Title"] = "دفتر يوميه";
+    Layout = "~/Views/Shared/_FinancialManagerLayout.cshtml";
+    var Pact = TempData["pacts"] as IEnumerable<Pact>;
+    var Expenses = TempData["expenses"] as IEnumerable<Expenses>;
+    var Equipments = TempData["equipment"] as IEnumerable<Equipments>;
+    var Supplies_Outcome = TempData["bills"] as IEnumerable<Supplies_Outcome>;
+    var PactSum = TempData["PactSum"];
+    var ExpensesSum = TempData["ExpensesSum"];
+    var EquipmentsSum = TempData["EquipmentsSum"];
+    var SuppliesSum = TempData["SuppliesSum"];
+}
+
+<div class="d-flex justify-content-between my-4">
+    <h4>دفتر يوميه</h4>
+
+    <form class="d-flex" asp-action="DailyFees" asp-controller="Financials">
+        <input type="date" name="datepicker" id="datepicker" />
+        <input type="submit" value="بحث" class="btn btn-primary me-3" />
+    </form>
+</div>
+<div class="accordion" id="accordionExample">
+    @*Supplies_Outcome*@
+    <div class="accordion-item">
+        <h4 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                مبالغ الخامات
+            </button>
+        </h4>
+        <div id="collapseOne" class="accordion-collapse collapse">
+            <div class="accordion-body">
+                <h5>الاجمالي : @SuppliesSum</h5>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <td>المهندس</td>
+                            <td>نوع التوريد</td>
+                            <td>سعر الوحده</td>
+                            <td>الكميه</td>
+                            <td>نوع القياس</td>
+                            <td>المبلغ الكلي</td>
+                            <td>المورد</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var expense in Supplies_Outcome)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(M => expense.Engineer.FullName)</td>
+                                <td>@Html.DisplayFor(M => expense.Type)</td>
+                                <td>@Html.DisplayFor(M => expense.CountPrice)</td>
+                                <td>@Html.DisplayFor(M => expense.Amount)</td>
+                                <td>@Html.DisplayFor(M => expense.PriceType)</td>
+                                <td>@Html.DisplayFor(M => expense.Price)</td>
+                                <td>@Html.DisplayFor(M => expense.Importer)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    @*Equipments*@
+    <div class="accordion-item">
+    <h4 class="accordion-header">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+           المعدات
+        </button>
+    </h4>
+    <div id="collapseTwo" class="accordion-collapse collapse">
+        <div class="accordion-body">
+            <h5>الاجمالي : @EquipmentsSum</h5>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <td>المهندس</td>
+                        <td>نوع التوريد</td>
+                        <td>سعر الساعه</td>
+                        <td>عدد الساعات</td>
+                        <td>المبلغ الكلي</td>
+                        <td>المورد</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var expense in Equipments)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(M => expense.Engineer.FullName)</td>
+                            <td>@Html.DisplayFor(M => expense.Name)</td>
+                            <td>@Html.DisplayFor(M => expense.HourPrice)</td>
+                            <td>@Html.DisplayFor(M => expense.HourCount)</td>
+                            <td>@Html.DisplayFor(M => expense.TotalPrice)</td>
+                            <td>@Html.DisplayFor(M => expense.Importer)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+    @*Expenses*@
+    <div class="accordion-item">
+        <h4 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                النثريات
+            </button>
+        </h4>
+        <div id="collapseThree" class="accordion-collapse collapse">
+            <div class="accordion-body">
+                <h5>الاجمالي : @ExpensesSum</h5>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <td>المهندس</td>
+                            <td>تفاصيل</td>
+                            <td>المبلغ الكلي</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var expense in Expenses)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(M => expense.Engineer.FullName)</td>
+                                <td>@Html.DisplayFor(M => expense.Details)</td>
+                                <td>@Html.DisplayFor(M => expense.Value)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    @*Expenses*@
+    <div class="accordion-item">
+        <h4 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                العهد
+            </button>
+        </h4>
+        <div id="collapseFour" class="accordion-collapse collapse">
+            <div class="accordion-body">
+                <h5>الاجمالي : @PactSum</h5>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <td>المستلم</td>
+                            <td>القيمه</td>
+                            <td>تأكيد العمليه</td>
+                            <td>المعطي</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var expense in Pact)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(M => expense.Engineer.FullName)</td>
+                                <td>@Html.DisplayFor(M => expense.Value)</td>
+                                <td>@Html.DisplayFor(M => expense.Confirmed)</td>
+                                <td>@Html.DisplayFor(M => expense.PactAdder)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>    
+

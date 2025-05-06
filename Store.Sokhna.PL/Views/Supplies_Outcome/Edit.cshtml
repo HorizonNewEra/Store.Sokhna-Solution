@@ -1,0 +1,65 @@
+﻿@model Supplies_Outcome
+@{
+    var importers = new SelectList(ViewData["D2"] as IEnumerable<Importers>, "Name", "Name");
+    ViewData["Title"] = "Update Supplies Outcome";
+    var Role = TempData["Role"] as string;
+    var USSN = TempData["SSN"] as string;
+    var Uname = TempData["FullName"] as string;
+}
+<h1>تعديل توريد</h1>
+<br />
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+    <div hidden>
+        <input readonly asp-for="SO_ID" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Importer" class="col-form-label">المورد</label>
+        <select asp-for="Importer" asp-items="importers" class="form-control">
+            <option value="@null">-----Select Importer-----</option>
+        </select>
+        <span asp-validation-for="Importer" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Type" class="col-form-label">نوع التوريد</label>
+        <input asp-for="Type" class="form-control" />
+        <span asp-validation-for="Type" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Amount" class="col-form-label">الكميه</label>
+        <input asp-for="Amount" class="form-control" />
+        <span asp-validation-for="Amount" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CountPrice" class="col-form-label">سعر الوحده</label>
+        <input asp-for="CountPrice" class="form-control" />
+        <span asp-validation-for="CountPrice" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="TotalPrice" class="col-form-label">المبلغ الاجمالي</label>
+        <input type="text" asp-for="Price" readonly id="TotalPrice" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="PriceType" class="col-form-label">نوع الوحده</label>
+        <select asp-for="PriceType" class="form-control">
+            <option value="@null">-----Select Unit-----</option>
+            <option value="Meters">Meters</option>
+            <option value="Units">Units</option>
+        </select>
+        <span asp-validation-for="PriceType" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label class="col-form-label">اسم المهندس</label>
+        <input type="text" readonly value="@Uname" class="form-control" />
+        <input type="text" asp-for="SSN" hidden readonly value="@USSN" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="DateOfAdding" class="col-form-label">تاريخ الاضافه</label>
+        <input asp-for="DateOfAdding" type="date" class="form-control" />
+        <span asp-validation-for="DateOfAdding" class="text-danger"></span>
+    </div>
+    <br />
+    <input type="submit" value="تعديل" class="btn btn-primary" />
+    <a asp-action="Index" class="btn btn-info">عوده الي القائمه</a>
+</form>
+
